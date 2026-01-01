@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Notification button handler
-    const notificationBtn = document.querySelector('.icon-btn');
+    const notificationBtn = document.getElementById('notification-btn');
     if (notificationBtn) {
         notificationBtn.addEventListener('click', function() {
             showToast('You have 3 new notifications');
@@ -168,55 +168,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const toast = document.createElement('div');
         toast.className = 'toast';
         toast.textContent = message;
-        
-        // Add styles
-        Object.assign(toast.style, {
-            position: 'fixed',
-            bottom: '100px',
-            left: '50%',
-            transform: 'translateX(-50%)',
-            backgroundColor: '#2D3436',
-            color: '#FFFFFF',
-            padding: '12px 24px',
-            borderRadius: '24px',
-            fontSize: '14px',
-            fontWeight: '500',
-            zIndex: '1000',
-            maxWidth: 'calc(100% - 64px)',
-            textAlign: 'center',
-            boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
-            animation: 'slideUp 0.3s ease'
-        });
-        
-        // Add animation keyframes
-        if (!document.querySelector('#toast-animation')) {
-            const style = document.createElement('style');
-            style.id = 'toast-animation';
-            style.textContent = `
-                @keyframes slideUp {
-                    from {
-                        opacity: 0;
-                        transform: translateX(-50%) translateY(20px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateX(-50%) translateY(0);
-                    }
-                }
-                
-                @keyframes slideDown {
-                    from {
-                        opacity: 1;
-                        transform: translateX(-50%) translateY(0);
-                    }
-                    to {
-                        opacity: 0;
-                        transform: translateX(-50%) translateY(20px);
-                    }
-                }
-            `;
-            document.head.appendChild(style);
-        }
         
         // Add to DOM
         document.body.appendChild(toast);
@@ -297,16 +248,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
-    
-    // Prevent default zoom on double tap
-    let lastTouchEnd = 0;
-    document.addEventListener('touchend', function(e) {
-        const now = Date.now();
-        if (now - lastTouchEnd <= 300) {
-            e.preventDefault();
-        }
-        lastTouchEnd = now;
-    }, false);
     
     // Add haptic feedback simulation
     function vibrateDevice() {
